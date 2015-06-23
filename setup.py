@@ -5,6 +5,11 @@ version = '1.0a1'
 maintainer = 'Mathias Leimgruber'
 
 tests_require = [
+    'ftw.builder',
+    'ftw.testing',
+    'ftw.testbrowser',
+    'plone.app.testing',
+    'plone.testing',
 ]
 
 extras_require = {
