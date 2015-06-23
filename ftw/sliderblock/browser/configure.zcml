@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="ftw.sliderblock">
+
+    <browser:page
+        for="ftw.sliderblock.contents.interfaces.ISliderBlock"
+        name="block_view"
+        permission="zope2.View"
+        class=".sliderblock.SliderBlockView"
+        />
+
+</configure>

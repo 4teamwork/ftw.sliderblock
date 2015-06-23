@@ -4,6 +4,7 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="ftw.sliderblock">
 
+    <include package=".browser" />
     <include file="permissions.zcml" />
     <include file="lawgiver.zcml" zcml:condition="installed ftw.lawgiver" />
     
