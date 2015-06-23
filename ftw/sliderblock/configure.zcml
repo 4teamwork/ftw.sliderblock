@@ -1,5 +1,14 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="ftw.sliderblock">
+
+    <genericsetup:registerProfile
+        name="default"
+        title="ftw.sliderblock default"
+        directory="profiles/default"
+        description="SliderBlock for use with ftw.simplelayout"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
 
 </configure>
