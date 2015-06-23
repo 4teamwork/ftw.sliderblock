@@ -47,6 +47,8 @@ setup(
         'ftw.simplelayout',
         'ftw.slider',
         'setuptools',
+        'plone.dexterity',
+        'plone.app.dexterity',
     ],
 
     tests_require=tests_require,

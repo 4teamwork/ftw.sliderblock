@@ -1,0 +1,36 @@
+from ftw.sliderblock import _
+from ftw.sliderblock.contents.constraints import validate_slick_config
+from ftw.sliderblock.contents.interfaces import ISliderBlock
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.dexterity.content import Container
+from plone.directives import form
+from zope import schema
+from zope.interface import alsoProvides
+from zope.interface import implements
+
+
+class ISliderBlockSchema(form.Schema):
+    """Slider block for simplelayout
+    """
+
+    title = schema.TextLine(
+        title=_(u'sliderblock_title_label', default=u'Title'),
+        required=True,
+    )
+
+    slick_config = schema.Text(
+        title=_(u'sliderblock_slick_config_label', default=u'Configuration'),
+        description=_(u'sliderblock_slick_config_description',
+                      default=u'See http://kenwheeler.github.io/slick/'),
+        required=False,
+        default=u'{"autoplay": true, "autoplaySpeed": 2000}',
+        constraint=validate_slick_config,
+    )
+
+    form.order_before(title='*')
+
+alsoProvides(ISliderBlockSchema, IFormFieldProvider)
+
+
+class SliderBlock(Container):
+    implements(ISliderBlock)
