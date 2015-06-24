@@ -1,3 +1,5 @@
+from collections import OrderedDict
+from ftw.simplelayout.browser.actions import DefaultActions
 from ftw.sliderblock import _
 from ftw.sliderblock.contents.constraints import validate_slick_config
 from ftw.sliderblock.contents.interfaces import ISliderBlock
@@ -5,6 +7,7 @@ from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import Container
 from plone.directives import form
 from zope import schema
+from zope.i18n import translate
 from zope.interface import alsoProvides
 from zope.interface import implements
 
@@ -34,3 +37,19 @@ alsoProvides(ISliderBlockSchema, IFormFieldProvider)
 
 class SliderBlock(Container):
     implements(ISliderBlock)
+
+
+class SliderBlockActions(DefaultActions):
+
+    def specific_actions(self):
+        return OrderedDict(
+            [
+                ('folderContents', {
+                    'class': 'icon-folder-contents redirect',
+                    'title': translate(
+                        _(u'label_show_folder_contents',
+                          default=u'Show folder contents'),
+                        context=self.request),
+                    'href': '/folder_contents'}),
+            ]
+        )

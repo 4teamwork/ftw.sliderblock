@@ -5,6 +5,7 @@
     i18n_domain="ftw.sliderblock">
 
     <include package=".browser" />
+    <include package=".contents" />
     <include file="permissions.zcml" />
     <include file="lawgiver.zcml" zcml:condition="installed ftw.lawgiver" />
     <include file="resources.zcml" zcml:condition="installed ftw.theming" />
