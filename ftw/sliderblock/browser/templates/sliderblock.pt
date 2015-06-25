@@ -3,6 +3,9 @@
       tal:omit-tag="python: 1"
       i18n:domain="ftw.sliderblock">
 
+    <h2 tal:content="here/Title"
+        tal:condition="here/show_title | python: True" />
+
     <tal:slider define="panes view/get_panes;
                         portal context/@@plone_portal_state/portal;">
         <script type="text/javascript" tal:content="view/get_slick_config"

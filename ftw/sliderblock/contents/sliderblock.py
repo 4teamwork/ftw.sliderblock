@@ -21,6 +21,12 @@ class ISliderBlockSchema(form.Schema):
         required=True,
     )
 
+    show_title = schema.Bool(
+        title=_(u'sliderblock_show_title_label', default=u'Show title'),
+        default=True,
+        required=False,
+    )
+
     slick_config = schema.Text(
         title=_(u'sliderblock_slick_config_label', default=u'Configuration'),
         description=_(u'sliderblock_slick_config_description',

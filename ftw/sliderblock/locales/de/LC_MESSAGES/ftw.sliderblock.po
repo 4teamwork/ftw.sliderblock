@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-06-24 14:34+0000\n"
+"POT-Creation-Date: 2015-06-25 15:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,22 +23,27 @@ msgid "SliderBlock"
 msgstr ""
 
 #. Default: "This SliderBlock is empty. Please add some SliderPanes through <a href=\"${DYNAMIC_CONTENT}\">folder contents</a>."
-#: ./ftw/sliderblock/browser/templates/sliderblock.pt:13
+#: ./ftw/sliderblock/browser/templates/sliderblock.pt:16
 msgid "empty_sliderblock_label"
 msgstr "Dieser SliderBlock ist leer. Bitte fügen Sie Bilder hinzu via <a href=\"${DYNAMIC_CONTENT}\">Inhalte</a>."
 
 #. Default: "Show folder contents"
-#: ./ftw/sliderblock/contents/sliderblock.py:50
+#: ./ftw/sliderblock/contents/sliderblock.py:56
 msgid "label_show_folder_contents"
 msgstr "Inhalte anzeigen"
 
+#. Default: "Show title"
+#: ./ftw/sliderblock/contents/sliderblock.py:25
+msgid "sliderblock_show_title_label"
+msgstr "Titel anzeigen"
+
 #. Default: "See http://kenwheeler.github.io/slick/"
-#: ./ftw/sliderblock/contents/sliderblock.py:26
+#: ./ftw/sliderblock/contents/sliderblock.py:32
 msgid "sliderblock_slick_config_description"
 msgstr "Siehe http://kenwheeler.github.io/slick/"
 
 #. Default: "Configuration"
-#: ./ftw/sliderblock/contents/sliderblock.py:25
+#: ./ftw/sliderblock/contents/sliderblock.py:31
 msgid "sliderblock_slick_config_label"
 msgstr "Konfiguration"
 
