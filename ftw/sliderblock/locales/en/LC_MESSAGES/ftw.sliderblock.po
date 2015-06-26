@@ -25,31 +25,31 @@ msgstr ""
 #. Default: "This SliderBlock is empty. Please add some SliderPanes through ${folder_contents_url}."
 #: ./ftw/sliderblock/browser/templates/sliderblock.pt:16
 msgid "empty_sliderblock_label"
-msgstr "Dieser SliderBlock ist leer. Bitte fügen Sie Bilder hinzu via <a href=\"${folder_contents_url}\">Inhalte</a>."
+msgstr "This SliderBlock is empty. Please add some SliderPanes through <a href=\"${folder_contents_url}\">folder contents</a>."
 
 #. Default: "Show folder contents"
 #: ./ftw/sliderblock/contents/sliderblock.py:56
 msgid "label_show_folder_contents"
-msgstr "Inhalte anzeigen"
+msgstr ""
 
 #. Default: "Show title"
 #: ./ftw/sliderblock/contents/sliderblock.py:25
 msgid "sliderblock_show_title_label"
-msgstr "Titel anzeigen"
+msgstr ""
 
 #. Default: "See http://kenwheeler.github.io/slick/"
 #: ./ftw/sliderblock/contents/sliderblock.py:32
 msgid "sliderblock_slick_config_description"
-msgstr "Siehe http://kenwheeler.github.io/slick/"
+msgstr ""
 
 #. Default: "Configuration"
 #: ./ftw/sliderblock/contents/sliderblock.py:31
 msgid "sliderblock_slick_config_label"
-msgstr "Konfiguration"
+msgstr ""
 
 #. Default: "Title"
 #: ./ftw/sliderblock/contents/sliderblock.py:20
 msgid "sliderblock_title_label"
-msgstr "Titel"
+msgstr ""
 
 
