@@ -1,0 +1,38 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="python: 1"
+      i18n:domain="ftw.sliderblock">
+
+    <h2 tal:content="here/Title"
+        tal:condition="here/show_title | python: True" />
+
+    <tal:slider define="panes view/get_panes;
+                        portal context/@@plone_portal_state/portal;">
+        <script type="text/javascript" tal:content="view/get_slick_config"
+                tal:condition="panes"/>
+
+        <div tal:condition="not:panes"
+             tal:define="folder_contents_url string:${context/absolute_url}/folder_contents;"
+             i18n:translate="empty_sliderblock_label">This SliderBlock is empty. Please add some SliderPanes through <a tal:attributes="href folder_contents_url">folder contents</a>.</div>
+        <div tal:condition="panes"
+             tal:attributes="class string:sliderWrapper; id string:uid_${context/UID}">
+            <div class="sliderPanes">
+                <div tal:repeat="pane panes" class="sliderPane">
+                    <a tal:omit-tag="not:pane/link"
+                       tal:attributes="href string:${portal/absolute_url}${pane/link}">
+                        <div class="sliderImage"
+                             tal:content="structure pane/@@images/image" />
+                        <div class="sliderText"
+                             tal:condition="pane/text">
+                            <p tal:condition="pane/title"
+                               tal:content="pane/title"
+                               class="documentFirstHeading title"/>
+                            <span tal:replace="structure pane/text/output"/>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </tal:slider>
+
+</html>
