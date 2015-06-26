@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-06-25 15:48+0000\n"
+"POT-Creation-Date: 2015-06-26 06:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "SliderBlock"
 msgstr ""
 
-#. Default: "This SliderBlock is empty. Please add some SliderPanes through <a href=\"${DYNAMIC_CONTENT}\">folder contents</a>."
+#. Default: "This SliderBlock is empty. Please add some SliderPanes through ${folder_contents_url}."
 #: ./ftw/sliderblock/browser/templates/sliderblock.pt:16
 msgid "empty_sliderblock_label"
 msgstr ""
