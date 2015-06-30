@@ -49,7 +49,7 @@ setup(
     zip_safe=False,
 
     install_requires=[
-        'ftw.simplelayout',
+        'ftw.simplelayout [contenttypes]',
         'ftw.slider',
         'setuptools',
         'plone.dexterity',
