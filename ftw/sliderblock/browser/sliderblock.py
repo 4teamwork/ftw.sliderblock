@@ -11,11 +11,7 @@ class SliderBlockView(BaseBlock):
         return self.context.getFolderContents(full_objects=True)
 
     def get_slick_config(self):
-        js = "jQuery(function($) {{" \
-             "  $('#uid_{uid}.sliderWrapper .sliderPanes').slick({config});" \
-             "}});"
-        return js.format(uid=self.context.UID(),
-                         config=self.context.slick_config)
+        return self.context.slick_config
 
     def can_add(self):
         context = aq_inner(self.context)
