@@ -1,3 +1,5 @@
+from Acquisition._Acquisition import aq_inner
+from Products.CMFCore.utils import getToolByName
 from ftw.simplelayout.browser.blocks.base import BaseBlock
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -14,3 +16,10 @@ class SliderBlockView(BaseBlock):
              "}});"
         return js.format(uid=self.context.UID(),
                          config=self.context.slick_config)
+
+    def can_add(self):
+        context = aq_inner(self.context)
+        mtool = getToolByName(context, 'portal_membership')
+        permission = mtool.checkPermission('ftw.sliderblock: Add SliderBlock',
+                                           context)
+        return bool(permission)
