@@ -46,4 +46,4 @@ class TestSliderBlockRendering(TestCase):
     def test_custom_slick_config(self, browser):
         browser.login().visit(self.block, view='@@block_view')
         self.assertIn(self.sliderblock_slick_config,
-                      browser.css('script').first.text)
+                      browser.css('.sliderWrapper').first.attrib['data-settings'])

@@ -8,14 +8,12 @@
 
     <tal:slider define="panes view/get_panes;
                         portal context/@@plone_portal_state/portal;">
-        <script type="text/javascript" tal:content="view/get_slick_config"
-                tal:condition="panes"/>
 
         <div tal:condition="python: view.can_add() and not panes"
              tal:define="folder_contents_url string:${context/absolute_url}/folder_contents;"
              i18n:translate="empty_sliderblock_label">This SliderBlock is empty. Please add some SliderPanes through <tal:href i18n:name="folder_contents_url" tal:content="folder_contents_url"></tal:href>.</div>
         <div tal:condition="panes"
-             tal:attributes="class string:sliderWrapper; id string:uid_${context/UID}">
+             tal:attributes="class string:sliderWrapper; id string:uid_${context/UID}; data-settings view/get_slick_config">
             <div class="sliderPanes">
                 <div tal:repeat="pane panes" class="sliderPane">
                     <a tal:omit-tag="not:pane/link"
