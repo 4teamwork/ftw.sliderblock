@@ -1,5 +1,5 @@
-$(document).on('onBeforeClose', '.overlay', function(){
-  ftwSliderInit();
+$(document).on("overlaySubmit", ".overlay", function(){
+  ftwSliderUpdate();
 });
 
 $(document).on('sortstop', '.sl-column', function(){
