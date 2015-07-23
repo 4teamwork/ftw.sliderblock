@@ -16,18 +16,22 @@
              tal:attributes="class string:sliderWrapper; id string:uid_${context/UID}; data-settings view/get_slick_config">
             <div class="sliderPanes">
                 <div tal:repeat="pane panes" class="sliderPane">
-                    <a tal:omit-tag="not:pane/link"
-                       tal:attributes="href string:${portal/absolute_url}${pane/link}">
-                        <div class="sliderImage"
-                             tal:content="structure pane/@@images/image" />
-                        <div class="sliderText"
-                             tal:condition="pane/text">
-                            <p tal:condition="pane/title"
-                               tal:content="pane/title"
-                               class="documentFirstHeading title"/>
-                            <span tal:replace="structure pane/text/output"/>
-                        </div>
-                    </a>
+                    <tal:pane tal:define="internal_link string:${portal/absolute_url}${pane/link};
+                                          link python: pane.link and internal_link or pane.external_url;">
+                        <a tal:omit-tag="not:link"
+                           tal:attributes="href link;
+                                           title pane/Description">
+                            <div class="sliderImage"
+                                 tal:content="structure pane/@@images/image" />
+                            <div class="sliderText"
+                                 tal:condition="pane/text">
+                                <p tal:condition="pane/title"
+                                   tal:content="pane/title"
+                                   class="documentFirstHeading title"/>
+                                <span tal:replace="structure pane/text/output"/>
+                            </div>
+                        </a>
+                      </tal:pane>
                 </div>
             </div>
         </div>
