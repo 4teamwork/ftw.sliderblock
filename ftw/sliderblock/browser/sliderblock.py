@@ -1,3 +1,4 @@
+import json
 from Acquisition._Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from ftw.simplelayout.browser.blocks.base import BaseBlock
@@ -11,7 +12,12 @@ class SliderBlockView(BaseBlock):
         return self.context.getFolderContents(full_objects=True)
 
     def get_slick_config(self):
-        return self.context.slick_config
+        # The config value may contain unwanted new lines. Let's remove them
+        # by loading and dumping as json.
+        if not self.context.slick_config:
+            return '{}'
+        config = json.loads(self.context.slick_config)
+        return json.dumps(config)
 
     def can_add(self):
         context = aq_inner(self.context)
