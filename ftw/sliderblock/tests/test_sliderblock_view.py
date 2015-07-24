@@ -56,7 +56,7 @@ class TestSliderBlockRendering(TestCase):
         This test makes sure the slick config does not contain newlines
         and is valid json.
         """
-        browser.login().visit(self.block, view='@@edit')
+        browser.login().visit(self.block, view='edit.json')
         browser.open_html(browser.json['content'])
         browser.fill(
             {'form.widgets.slick_config': u'{"foo": true, \n"bar": 2000}'}
