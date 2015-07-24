@@ -66,3 +66,21 @@ class TestSliderBlockRendering(TestCase):
         self.assertEqual(
             '{"foo": true, "bar": 2000}',
             browser.css('.sl-block-content div').first.attrib['data-settings'])
+
+    @browsing
+    def test_emtpy_slick_config(self, browser):
+        page = create(Builder('sl content page'))
+        block = create(Builder('sliderblock')
+                       .within(page)
+                       .titled('SliderBlock title')
+                       .having(slick_config=''))
+
+        create(Builder('slider pane')
+               .within(block)
+               .titled(u'Pane 1')
+               .with_dummy_image())
+
+        browser.login().open(page)
+        self.assertEqual(
+            '{}',
+            browser.css('.sl-block-content div').first.attrib['data-settings'])

@@ -14,6 +14,8 @@ class SliderBlockView(BaseBlock):
     def get_slick_config(self):
         # The config value may contain unwanted new lines. Let's remove them
         # by loading and dumping as json.
+        if not self.context.slick_config:
+            return '{}'
         config = json.loads(self.context.slick_config)
         return json.dumps(config)
 
