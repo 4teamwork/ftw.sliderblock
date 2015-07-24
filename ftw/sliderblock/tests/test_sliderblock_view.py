@@ -1,6 +1,7 @@
 import json
 from ftw.builder import Builder
 from ftw.builder import create
+import transaction
 from ftw.sliderblock.testing import FTW_SLIDERBLOCK_FUNCTIONAL_TESTING
 from ftw.testbrowser import browsing
 from plone.app.testing import setRoles
@@ -45,5 +46,23 @@ class TestSliderBlockRendering(TestCase):
     @browsing
     def test_custom_slick_config(self, browser):
         browser.login().visit(self.block, view='@@block_view')
-        self.assertIn(self.sliderblock_slick_config,
-                      browser.css('.sliderWrapper').first.attrib['data-settings'])
+        self.assertIn(
+            self.sliderblock_slick_config,
+            browser.css('.sliderWrapper').first.attrib['data-settings'])
+
+    @browsing
+    def test_custom_slick_config_has_no_newline(self, browser):
+        """
+        This test makes sure the slick config does not contain newlines
+        and is valid json.
+        """
+        browser.login().visit(self.block, view='@@edit')
+        browser.open_html(browser.json['content'])
+        browser.fill(
+            {'form.widgets.slick_config': u'{"foo": true, \n"bar": 2000}'}
+        ).save()
+
+        browser.login().visit(self.page)
+        self.assertEqual(
+            '{"foo": true, "bar": 2000}',
+            browser.css('.sl-block-content div').first.attrib['data-settings'])
