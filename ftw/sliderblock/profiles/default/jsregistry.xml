@@ -2,6 +2,6 @@
 <object name="portal_javascripts">
 
   <javascript id="++resource++ftw.sliderblock/sliderblock.js"
-              enabled="True" insert-after="++resource++ftw.simplelayout.resources/main.js" authenticated="True" />
+              enabled="True" insert-after="++resource++ftw.simplelayout.resources/main.js" authenticated="False" />
 
 </object>
