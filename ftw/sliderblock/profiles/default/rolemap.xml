@@ -2,6 +2,7 @@
 <rolemap>
     <permissions>
         <permission name="ftw.sliderblock: Add SliderBlock" acquire="False">
+            <role name="Site Administrator"/>
             <role name="Manager"/>
             <role name="Contributor"/>
         </permission>
