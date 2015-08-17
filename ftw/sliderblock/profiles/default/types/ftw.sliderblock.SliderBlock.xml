@@ -2,11 +2,11 @@
 <object name="ftw.sliderblock.SliderBlock"
         meta_type="Dexterity FTI"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-        i18n:domain="ftw.sliderblock" >
+        i18n:domain="ftw.sliderblock">
 
     <!-- Basic metadata -->
     <property name="title" i18n:translate="">SliderBlock</property>
-    <property name="description" i18n:translate="">A block which renders a rotating image slider to be used with ftw.simplelayout.</property>
+    <property name="description" i18n:translate="">The slider block renders an image carousel. The images shown in the carousel may link to internal or external URLs.</property>
     <property name="icon_expr"></property>
     <property name="allow_discussion">False</property>
     <property name="global_allow">False</property>
