@@ -22,7 +22,7 @@
 
     sliders.init();
 
-    $(document).on("overlaySubmit", ".overlay", function() { sliders.update(); });
+    $(document).on("blockContentReplaced", function() { sliders.update(); });
 
     $(document).on("sortstop", ".sl-column", function() { sliders.update(); });
 
