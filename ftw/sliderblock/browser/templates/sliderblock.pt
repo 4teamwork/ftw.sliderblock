@@ -19,8 +19,7 @@
                     <tal:pane tal:define="internal_link string:${portal/absolute_url}${pane/link};
                                           link python: pane.link and internal_link or pane.external_url;">
                         <a tal:omit-tag="not:link"
-                           tal:attributes="href link;
-                                           title pane/Description">
+                           tal:attributes="href link;">
                             <div class="sliderImage"
                                  tal:define="images pane/@@images">
                                  <img tal:define="scales pane/@@images;
@@ -28,7 +27,7 @@
                                        tal:attributes="src thumbnail/url;
                                                        width thumbnail/width;
                                                        height thumbnail/height;
-                                                       alt python: '' if link else pane.Description()"/>
+                                                       alt pane/Description"/>
                             </div>
                             <div class="sliderText"
                                  tal:condition="pane/text">
