@@ -20,7 +20,7 @@ class TestSliderBlockRendering(TestCase):
         self.page = create(Builder('sl content page'))
 
         slick_config = json.dumps(
-            {'autoplay': False, 'autoplaySpeed': 1000, 'arrows': False}
+            {'labels': {'pause': 'Pause', 'play': 'Play', 'prev': 'Previous', 'next': 'Next'}, 'arrows': 'false', 'autoplaySpeed': 1000, 'autoplay': 'false'}
         )
         self.sliderblock_slick_config = slick_config
         block_builder = Builder('sliderblock')
@@ -64,7 +64,7 @@ class TestSliderBlockRendering(TestCase):
 
         browser.login().visit(self.page)
         self.assertEqual(
-            '{"foo": true, "bar": 2000}',
+            '{"labels": {"prev": "Previous", "play": "Play", "pause": "Pause", "next": "Next"}, "foo": true, "bar": 2000}',
             browser.css('.sl-block-content div').first.attrib['data-settings'])
 
     @browsing
