@@ -1,7 +1,6 @@
 import json
 from ftw.builder import Builder
 from ftw.builder import create
-import transaction
 from ftw.sliderblock.testing import FTW_SLIDERBLOCK_FUNCTIONAL_TESTING
 from ftw.testbrowser import browsing
 from plone.app.testing import setRoles
@@ -20,13 +19,12 @@ class TestSliderBlockRendering(TestCase):
         self.page = create(Builder('sl content page'))
 
         slick_config = json.dumps(
-            {'labels': {'pause': 'Pause', 'play': 'Play', 'prev': 'Previous', 'next': 'Next'}, 'arrows': 'false', 'autoplaySpeed': 1000, 'autoplay': 'false'}
+            {'arrows': 'false', 'autoplaySpeed': 1000, 'autoplay': 'false'}
         )
-        self.sliderblock_slick_config = slick_config
         block_builder = Builder('sliderblock')
         block_builder.within(self.page)
         block_builder.titled('SliderBlock title')
-        block_builder.having(slick_config=self.sliderblock_slick_config)
+        block_builder.having(slick_config=slick_config)
         self.block = create(block_builder)
 
         create(Builder('slider pane')
@@ -46,9 +44,14 @@ class TestSliderBlockRendering(TestCase):
     @browsing
     def test_custom_slick_config(self, browser):
         browser.login().visit(self.block, view='@@block_view')
-        self.assertIn(
-            self.sliderblock_slick_config,
-            browser.css('.sliderWrapper').first.attrib['data-settings'])
+
+        self.assertEquals(
+            {'labels': {'pause': 'Pause',
+                        'play': 'Play',
+                        'prev': 'Previous',
+                        'next': 'Next'},
+             'arrows': 'false', 'autoplaySpeed': 1000, 'autoplay': 'false'},
+            json.loads(browser.css('.sliderWrapper').first.attrib['data-settings']))
 
     @browsing
     def test_custom_slick_config_has_no_newline(self, browser):

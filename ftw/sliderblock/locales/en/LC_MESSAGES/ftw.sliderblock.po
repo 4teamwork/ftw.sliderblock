@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-24 12:25+0000\n"
+"POT-Creation-Date: 2015-09-28 07:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,26 +31,6 @@ msgstr "This SliderBlock is empty. Please add some SliderPanes through <a href=\
 #: ./ftw/sliderblock/contents/sliderblock.py:56
 msgid "label_show_folder_contents"
 msgstr ""
-
-#. Default: "Next"
-#: ./ftw/sliderblock/browser/sliderblock.py:22
-msgid "label_slider_next"
-msgstr "Next"
-
-#. Default: "Pause"
-#: ./ftw/sliderblock/browser/sliderblock.py:20
-msgid "label_slider_pause"
-msgstr "Pause"
-
-#. Default: "Play"
-#: ./ftw/sliderblock/browser/sliderblock.py:18
-msgid "label_slider_play"
-msgstr "Play"
-
-#. Default: "Previous"
-#: ./ftw/sliderblock/browser/sliderblock.py:24
-msgid "label_slider_prev"
-msgstr "Previous"
 
 #. Default: "Show title"
 #: ./ftw/sliderblock/contents/sliderblock.py:25
