@@ -54,6 +54,7 @@ setup(
         'setuptools',
         'plone.dexterity',
         'plone.app.dexterity',
+        'Plone',
     ],
 
     tests_require=tests_require,
