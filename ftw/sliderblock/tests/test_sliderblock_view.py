@@ -66,9 +66,14 @@ class TestSliderBlockRendering(TestCase):
         ).save()
 
         browser.login().visit(self.page)
-        self.assertEqual(
-            '{"labels": {"prev": "Previous", "play": "Play", "pause": "Pause", "next": "Next"}, "foo": true, "bar": 2000}',
-            browser.css('.sl-block-content div').first.attrib['data-settings'])
+        self.assertDictEqual(
+            json.loads(
+                '{"labels": {"prev": "Previous", "play": "Play", "pause": "Pause", "next": "Next"}, "foo": true, "bar": 2000}'
+            ),
+            json.loads(
+                browser.css('.sl-block-content div').first.attrib['data-settings']
+            )
+        )
 
     @browsing
     def test_emtpy_slick_config(self, browser):
