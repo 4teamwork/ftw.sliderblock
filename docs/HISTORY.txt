@@ -5,6 +5,10 @@ Changelog
 1.0.0a2 (unreleased)
 --------------------
 
+- Remove metadata.xml-dependencie to ftw.simplelayout.
+  This package is an addon of ftw.simplelayout and should not install it.
+  [elioschmutz]
+
 - Fix failing tests (caused by https://github.com/4teamwork/ftw.slider/pull/60).
   [mbaechtold]
 
