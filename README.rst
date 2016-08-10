@@ -4,8 +4,8 @@
 Introduction
 ============
 
-*This package is an addon for `ftw.simplelayout <http://github.com/4teamwork/ftw.simplelayout>`_. Please make sure you
-already installed `ftw.simplelayout` on your plone site before installing this addon.*
+This package is an addon for `ftw.simplelayout <http://github.com/4teamwork/ftw.simplelayout>`_. Please make sure you
+already installed ``ftw.simplelayout`` on your plone site before installing this addon.
 
 SliderBlock provides the integration of an image slider on a page powered
 by ftw.simplelayout. It uses the existing functionality of ftw.slider.
