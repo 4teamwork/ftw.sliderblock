@@ -2,5 +2,6 @@
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
     <bindings>
         <type type_id="ftw.sliderblock.SliderBlock"/>
+        <type type_id="ftw.slider.Pane"/>
     </bindings>
 </object>
