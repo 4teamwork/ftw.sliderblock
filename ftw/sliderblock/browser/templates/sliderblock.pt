@@ -23,7 +23,7 @@
                             <div class="sliderImage"
                                  tal:define="images pane/@@images">
                                  <img tal:define="scales pane/@@images;
-                                                  thumbnail python: scales.scale('image');"
+                                                  thumbnail python: scales.scale('image', scale='sliderblock', direction='down');"
                                        tal:attributes="src thumbnail/url;
                                                        width thumbnail/width;
                                                        height thumbnail/height;
