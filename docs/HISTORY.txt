@@ -5,6 +5,9 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
+- Implement direct edit of slider panes on the sliderblock.
+  [mathias.leimgruber]
+
 - Use sliderblock specific scale
   [Kevin Bieri]
 

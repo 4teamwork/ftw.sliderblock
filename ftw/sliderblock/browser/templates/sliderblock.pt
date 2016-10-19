@@ -18,10 +18,19 @@
                 <div tal:repeat="pane panes" class="sliderPane">
                     <tal:pane tal:define="internal_link string:${portal/absolute_url}${pane/link};
                                           link python: pane.link and internal_link or pane.external_url;">
+
+                        <a href="./sl-ajax-inner-edit-view"
+                           tal:condition="view/can_add"
+                           class="inneredit"
+                           tal:attributes="data-uid pane/UID"
+                           title="Edit image directly"
+                           i18n:attributes="title"></a>
+
                         <a tal:omit-tag="not:link"
                            tal:attributes="href link;">
                             <div class="sliderImage"
                                  tal:define="images pane/@@images">
+
                                  <img tal:define="scales pane/@@images;
                                                   thumbnail python: scales.scale('image', scale='sliderblock', direction='down');"
                                        tal:attributes="src thumbnail/url;

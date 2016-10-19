@@ -1,1 +1,11 @@
 @include portal-type-font-awesome-icon(ftw-sliderblock-sliderblock, forward);
+
+.ftw-sliderblock-sliderblock .inneredit {
+  font-size: $font-size-large;
+  line-height: $font-size-large;
+  position: absolute;
+  right: 0;
+
+  @extend .fa-icon;
+  @extend .fa-edit;
+}
