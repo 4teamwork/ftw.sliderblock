@@ -5,6 +5,9 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
+- Enable upload action on sliderblock.
+  [mathias.leimgruber]
+
 - Implement direct edit of slider panes on the sliderblock.
   [mathias.leimgruber]
 
