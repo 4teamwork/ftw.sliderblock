@@ -5,6 +5,9 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
+- Initialize new uploaded slider panes on sliderblock.
+  [mathias.leimgruber]
+
 - Add simple is image validator for upload factory.
   [mathias.leimgruber]
 
