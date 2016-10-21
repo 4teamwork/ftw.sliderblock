@@ -50,7 +50,7 @@ setup(
     zip_safe=False,
 
     install_requires=[
-        'ftw.simplelayout [contenttypes]',
+        'ftw.simplelayout [contenttypes] >= 1.12.0',
         'ftw.slider',
         'setuptools',
         'plone.dexterity',
