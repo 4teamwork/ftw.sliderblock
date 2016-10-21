@@ -14,4 +14,10 @@
         class=".sliderblock.SliderBlockView"
         />
 
+    <adapter
+        factory=".uploadcapable.SliderBlockQuickUploadCapableFileFactory"
+        for="ftw.sliderblock.contents.interfaces.ISliderBlock"
+        provides="collective.quickupload.interfaces.IQuickUploadFileFactory"
+        />
+
 </configure>

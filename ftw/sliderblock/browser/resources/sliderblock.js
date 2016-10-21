@@ -15,7 +15,16 @@
       update: function() {
         var self = this;
         $(".sliderWrapper > :not(.slick-initialized)").each(function() {
-          self.sliders[$(this).parent().attr("id")].update($(this), $(this).parent().data("settings"));
+
+          var sliderPane = $(this);
+          var sliderId = sliderPane.parent().attr("id");
+
+          if (sliderId in self.sliders) {
+            self.sliders[sliderId].update(sliderPane, sliderPane.parent().data("settings"));
+          } else {
+            self.sliders[sliderId] = new global.Slider(sliderPane, sliderPane.data("settings"));
+          }
+
         });
       }
     };

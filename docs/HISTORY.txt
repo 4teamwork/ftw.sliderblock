@@ -5,6 +5,21 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
+- This release needs at lease ftw.simplelayout 1.12.0.
+  [mathias.leimgruber]
+
+- Initialize new uploaded slider panes on sliderblock.
+  [mathias.leimgruber]
+
+- Add simple is image validator for upload factory.
+  [mathias.leimgruber]
+
+- Enable upload action on sliderblock.
+  [mathias.leimgruber]
+
+- Implement direct edit of slider panes on the sliderblock.
+  [mathias.leimgruber]
+
 - Use sliderblock specific scale
   [Kevin Bieri]
 
