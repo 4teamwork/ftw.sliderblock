@@ -2,8 +2,11 @@ Changelog
 =========
 
 
-1.0.3 (unreleased)
+1.1.0 (unreleased)
 ------------------
+
+- This release needs at least ftw.slider 3.0.0.
+  [mathias.leimgruber]
 
 - This release needs at lease ftw.simplelayout 1.12.0.
   [mathias.leimgruber]

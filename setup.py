@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0.3.dev0'
+version = '1.1.0.dev0'
 maintainer = 'Mathias Leimgruber'
 
 tests_require = [
@@ -51,7 +51,7 @@ setup(
 
     install_requires=[
         'ftw.simplelayout [contenttypes] >= 1.12.0',
-        'ftw.slider',
+        'ftw.slider >= 3.0.0',
         'setuptools',
         'plone.dexterity',
         'plone.app.dexterity',
