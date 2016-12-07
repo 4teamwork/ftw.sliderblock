@@ -6,6 +6,7 @@ from ftw.testbrowser import browsing
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from unittest2 import TestCase
+import transaction
 
 
 class TestSliderBlockRendering(TestCase):
@@ -92,3 +93,21 @@ class TestSliderBlockRendering(TestCase):
         self.assertEqual(
             '{}',
             browser.css('.sl-block-content div').first.attrib['data-settings'])
+
+    @browsing
+    def test_images_are_cropped_and_down_scaled_by_default(self, browser):
+        browser.login().visit(self.block, view='@@block_view')
+
+        img = browser.css('.sliderPane img').first
+        self.assertEquals('1200', img.attrib['width'])
+        self.assertEquals('800', img.attrib['height'])
+
+    @browsing
+    def test_images_are_not_cropped_and_upscaled_option(self, browser):
+        self.block.crop_image = False
+        transaction.commit()
+        browser.login().visit(self.block, view='@@block_view')
+
+        img = browser.css('.sliderPane img').first
+        self.assertEquals('800', img.attrib['width'])
+        self.assertEquals('800', img.attrib['height'])

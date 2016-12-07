@@ -28,6 +28,16 @@ class ISliderBlockSchema(form.Schema):
         required=False,
     )
 
+    crop_image = schema.Bool(
+        title=_(u'sliderblock_crop_image_label',
+                default=u'Crop and scale images'),
+        description=_(u'help_text_crop_image',
+                      default=u'Crop and scale images to a predefined ratio'),
+        default=True,
+        required=False,
+        missing_value=True
+    )
+
     slick_config = schema.Text(
         title=_(u'sliderblock_slick_config_label', default=u'Configuration'),
         description=_(u'sliderblock_slick_config_description',
