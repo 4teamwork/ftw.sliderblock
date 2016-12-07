@@ -92,3 +92,11 @@ class TestSliderBlockRendering(TestCase):
         self.assertEqual(
             '{}',
             browser.css('.sl-block-content div').first.attrib['data-settings'])
+
+    @browsing
+    def test_images_are_cropped_by_default(self, browser):
+        browser.login().visit(self.block, view='@@block_view')
+
+        img = browser.css('.sliderPane img').first
+        self.assertEquals('1200', img.attrib['width'])
+        self.assertEquals('800', img.attrib['height'])
