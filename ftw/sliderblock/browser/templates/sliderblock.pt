@@ -7,6 +7,7 @@
         tal:condition="here/show_title | python: True" />
 
     <tal:slider define="panes view/panes;
+                        direction python: context.crop_image and 'down' or 'up';
                         portal context/@@plone_portal_state/portal;">
 
         <div tal:condition="python: view.can_add() and not panes"
@@ -32,7 +33,7 @@
                                  tal:define="images pane/@@images">
 
                                  <img tal:define="scales pane/@@images;
-                                                  thumbnail python: scales.scale('image', scale='sliderblock', direction='down');"
+                                                  thumbnail python: scales.scale('image', scale='sliderblock', direction=direction);"
                                        tal:attributes="src thumbnail/url;
                                                        width thumbnail/width;
                                                        height thumbnail/height;
