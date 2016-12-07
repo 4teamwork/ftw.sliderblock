@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.1 (unreleased)
+1.2.0 (2016-12-07)
 ------------------
 
 - Add checkbox to choose if the image should be cropped or not.
