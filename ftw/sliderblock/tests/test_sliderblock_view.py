@@ -1,22 +1,24 @@
-import json
 from ftw.builder import Builder
 from ftw.builder import create
-from ftw.sliderblock.testing import FTW_SLIDERBLOCK_FUNCTIONAL_TESTING
+from ftw.sliderblock.tests import FunctionalTestCase
 from ftw.testbrowser import browsing
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-from unittest2 import TestCase
+from plone.app.textfield import RichTextValue
+import json
 import transaction
 
 
-class TestSliderBlockRendering(TestCase):
-
-    layer = FTW_SLIDERBLOCK_FUNCTIONAL_TESTING
+class TestSliderBlockRendering(FunctionalTestCase):
 
     def setUp(self):
         super(TestSliderBlockRendering, self).setUp()
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager', 'Site Administrator'])
+        self.grant('Manager')
+
+    def _create_test_content(self):
+        """
+        This method can be used to set up some test content. The method
+        may be called from various test case, but not all (if they require
+        very special test data).
+        """
         self.page = create(Builder('sl content page'))
 
         slick_config = json.dumps(
@@ -39,11 +41,13 @@ class TestSliderBlockRendering(TestCase):
 
     @browsing
     def test_slider_panes_visible(self, browser):
+        self._create_test_content()
         browser.login().visit(self.block, view='@@block_view')
         self.assertEquals(2, len(browser.css('.sliderPane')))
 
     @browsing
     def test_custom_slick_config(self, browser):
+        self._create_test_content()
         browser.login().visit(self.block, view='@@block_view')
 
         self.assertEquals(
@@ -60,6 +64,7 @@ class TestSliderBlockRendering(TestCase):
         This test makes sure the slick config does not contain newlines
         and is valid json.
         """
+        self._create_test_content()
         browser.login().visit(self.block, view='edit.json')
         browser.open_html(browser.json['content'])
         browser.fill(
@@ -96,6 +101,7 @@ class TestSliderBlockRendering(TestCase):
 
     @browsing
     def test_images_are_cropped_and_down_scaled_by_default(self, browser):
+        self._create_test_content()
         browser.login().visit(self.block, view='@@block_view')
 
         img = browser.css('.sliderPane img').first
@@ -104,6 +110,7 @@ class TestSliderBlockRendering(TestCase):
 
     @browsing
     def test_images_are_not_cropped_and_upscaled_option(self, browser):
+        self._create_test_content()
         self.block.crop_image = False
         transaction.commit()
         browser.login().visit(self.block, view='@@block_view')
@@ -111,3 +118,91 @@ class TestSliderBlockRendering(TestCase):
         img = browser.css('.sliderPane img').first
         self.assertEquals('800', img.attrib['width'])
         self.assertEquals('800', img.attrib['height'])
+
+    @browsing
+    def test_slider_pane_without_text_does_not_render_any_content(self, browser):
+        """
+        This test makes sure that a slider pane without text does not render any
+        content (neither the title nor the text).
+        """
+        page = create(Builder('sl content page'))
+        container = create(Builder('sliderblock')
+                           .titled(u'Title of the slider block')
+                           .within(page))
+        create(Builder('slider pane')
+               .titled(u'The title of the pane')
+               .with_dummy_image()
+               .within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEqual(
+            [''],
+            browser.css('.sliderPane').text
+        )
+
+    @browsing
+    def test_slider_pane_with_text_does_only_render_the_text(self, browser):
+        """
+        This test makes sure that a slider pane having some text will really
+        render the text.
+        """
+        page = create(Builder('sl content page'))
+        container = create(Builder('sliderblock')
+                           .titled(u'Title of the slider block')
+                           .within(page))
+        create(Builder('slider pane')
+               .titled(u'The title of the pane')
+               .having(text=RichTextValue('The text of the pane'))
+               .with_dummy_image()
+               .within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEqual(
+            ['The text of the pane'],
+            browser.css('.sliderPane').text
+        )
+
+    @browsing
+    def test_slider_pane_with_title_but_without_text(self, browser):
+        """
+        This test makes sure that a slider pane configured to show the title but
+        without text will really render the title.
+        """
+        page = create(Builder('sl content page'))
+        container = create(Builder('sliderblock')
+                           .titled(u'Title of the slider block')
+                           .within(page))
+        create(Builder('slider pane')
+               .titled(u'The title of the pane')
+               .having(show_title=True)
+               .with_dummy_image()
+               .within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEqual(
+            ['The title of the pane'],
+            browser.css('.sliderPane').text
+        )
+
+    @browsing
+    def test_slider_pane_with_title_and_with_text(self, browser):
+        """
+        This test makes sure that a slider pane configured to show the title
+        and having some text will render both the title and the text.
+        """
+        page = create(Builder('sl content page'))
+        container = create(Builder('sliderblock')
+                           .titled(u'Title of the slider block')
+                           .within(page))
+        create(Builder('slider pane')
+               .titled(u'The title of the pane')
+               .having(text=RichTextValue('The text of the pane'))
+               .having(show_title=True)
+               .with_dummy_image()
+               .within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEqual(
+            ['The title of the pane The text of the pane'],
+            browser.css('.sliderPane').text
+        )
