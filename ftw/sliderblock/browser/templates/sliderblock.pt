@@ -40,11 +40,12 @@
                                                        alt pane/Description"/>
                             </div>
                             <div class="sliderText"
-                                 tal:condition="pane/text">
-                                <p tal:condition="pane/title"
+                                 tal:condition="python: pane.show_title or pane.text">
+                                <p tal:condition="pane/show_title"
                                    tal:content="pane/title"
                                    tal:attributes="class python: 'documentFirstHeading title external-link' if pane.external_url else 'documentFirstHeading title'"/>
-                                <span tal:replace="structure pane/text/output"/>
+                                <span tal:condition="pane/text"
+                                      tal:replace="structure pane/text/output"/>
                             </div>
                         </a>
                       </tal:pane>

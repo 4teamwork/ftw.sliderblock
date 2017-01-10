@@ -51,7 +51,7 @@ setup(
 
     install_requires=[
         'ftw.simplelayout [contenttypes] >= 1.12.0',
-        'ftw.slider >= 3.0.0',
+        'ftw.slider >= 3.1.0',
         'setuptools',
         'plone.dexterity',
         'plone.app.dexterity',
