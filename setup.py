@@ -53,6 +53,7 @@ setup(
         'ftw.simplelayout [contenttypes] >= 1.12.0',
         'ftw.slider >= 3.1.0',
         'setuptools',
+        'plone.api',
         'plone.dexterity',
         'plone.app.dexterity',
         'Plone',

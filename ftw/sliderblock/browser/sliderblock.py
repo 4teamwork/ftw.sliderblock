@@ -1,6 +1,7 @@
 from Acquisition._Acquisition import aq_inner
 from ftw.simplelayout.browser.blocks.base import BaseBlock
 from ftw.slider.browser.slider import SliderView
+from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -26,6 +27,7 @@ class SliderBlockView(BaseBlock, SliderView):
                 'text': pane.text,
                 'show_pane_caption': pane.show_title or pane.text,
                 'image_tag': self.get_image_tag(pane),
+                'link_url': self.get_link_url(pane),
             })
         return data
 
@@ -44,3 +46,17 @@ class SliderBlockView(BaseBlock, SliderView):
         direction = self.context.crop_image and 'down' or 'up'
         scale = scaling.scale('image', scale='sliderblock', direction=direction)
         return scale.tag(css_class='headerImage', alt=pane.Description(), title='')
+
+    def get_link_url(self, pane):
+        """
+        Returns the link url of the pane. Internal links
+        take precedence over external url.
+        """
+        internal_link = pane.link
+        if internal_link:
+            return '{0}{1}'.format(
+                api.portal.get().absolute_url(),
+                internal_link.startswith('/') and internal_link or '/' + internal_link
+            )
+
+        return pane.external_url or ''

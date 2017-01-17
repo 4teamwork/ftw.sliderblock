@@ -15,8 +15,7 @@
              tal:attributes="class string:sliderWrapper; id string:uid_${context/UID}; data-settings view/get_slick_config">
             <div class="sliderPanes">
                 <div tal:repeat="pane panes" class="sliderPane">
-                    <tal:pane tal:define="internal_link string:${portal/absolute_url}/${pane/link};
-                                          link python: pane.link and internal_link or pane.external_url;">
+                    <tal:pane>
 
                         <a href="./sl-ajax-inner-edit-view"
                            tal:condition="view/can_add"
@@ -25,8 +24,8 @@
                            title="Edit image directly"
                            i18n:attributes="title"></a>
 
-                        <a tal:omit-tag="not:link"
-                           tal:attributes="href link;">
+                        <a tal:omit-tag="not: pane/link_url"
+                           tal:attributes="href pane/link_url;">
                             <div class="sliderImage">
                                  <img tal:replace="structure pane/image_tag"/>
                             </div>
