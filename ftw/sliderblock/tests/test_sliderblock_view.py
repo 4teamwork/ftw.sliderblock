@@ -66,7 +66,7 @@ class TestSliderBlockRendering(FunctionalTestCase):
         """
         self._create_test_content()
         browser.login().visit(self.block, view='edit.json')
-        browser.open_html(browser.json['content'])
+        browser.parse(browser.json['content'])
         browser.fill(
             {'form.widgets.slick_config': u'{"foo": true, \n"bar": 2000}'}
         ).save()
