@@ -25,7 +25,8 @@
                            i18n:attributes="title"></a>
 
                         <a tal:omit-tag="not: pane/link_url"
-                           tal:attributes="href pane/link_url;">
+                           tal:attributes="href pane/link_url;"
+                           class="slider-link">
                             <div class="sliderImage">
                                  <img tal:replace="structure pane/image_tag"/>
                             </div>
