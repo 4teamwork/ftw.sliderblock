@@ -7,10 +7,20 @@ from ftw.sliderblock.contents.interfaces import ISliderBlock
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import Container
 from plone.directives import form
+from plone.registry.interfaces import IRegistry
 from zope import schema
+from zope.component import getUtility
 from zope.i18n import translate
 from zope.interface import alsoProvides
 from zope.interface import implements
+
+
+def slick_config_default_value():
+    settings = getUtility(IRegistry)
+    return settings.get(
+        'ftw.sliderblock.default_slick_config',
+        u'{"autoplay": true, "autoplaySpeed": 2000}'
+    )
 
 
 class ISliderBlockSchema(form.Schema):
@@ -43,7 +53,7 @@ class ISliderBlockSchema(form.Schema):
         description=_(u'sliderblock_slick_config_description',
                       default=u'See http://kenwheeler.github.io/slick/'),
         required=False,
-        default=u'{"autoplay": true, "autoplaySpeed": 2000}',
+        defaultFactory=slick_config_default_value,
         constraint=validate_slick_config,
     )
 
