@@ -5,7 +5,8 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- The Slick default config (used when creating a slider block)
+  can be customized trough a registry record. [mbaechtold]
 
 
 1.3.3 (2017-05-17)
