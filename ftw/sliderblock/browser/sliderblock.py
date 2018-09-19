@@ -1,5 +1,6 @@
 from Acquisition._Acquisition import aq_inner
 from ftw.simplelayout.browser.blocks.base import BaseBlock
+from ftw.simplelayout.images.interfaces import IImageLimits
 from ftw.slider.browser.slider import SliderView
 from plone import api
 from Products.CMFCore.utils import getToolByName
@@ -28,6 +29,7 @@ class SliderBlockView(BaseBlock, SliderView):
                 'show_pane_caption': pane.show_title or pane.text,
                 'image_tag': self.get_image_tag(pane),
                 'link_url': self.get_link_url(pane),
+                'obj': pane,
             })
         return data
 
@@ -60,3 +62,6 @@ class SliderBlockView(BaseBlock, SliderView):
             )
 
         return pane.external_url or ''
+
+    def show_low_image_quality_indicator(self, paneData):
+        return self.can_add() and IImageLimits(paneData.get('obj')).has_low_quality_image()

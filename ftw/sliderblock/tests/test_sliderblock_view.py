@@ -1,7 +1,9 @@
 from ftw.builder import Builder
 from ftw.builder import create
+from ftw.simplelayout.interfaces import ISimplelayoutDefaultSettings
 from ftw.sliderblock.tests import FunctionalTestCase
 from ftw.testbrowser import browsing
+from plone import api
 from plone.app.textfield import RichTextValue
 import json
 import transaction
@@ -206,3 +208,60 @@ class TestSliderBlockRendering(FunctionalTestCase):
             ['The title of the pane The text of the pane'],
             browser.css('.sliderPane').text
         )
+
+    def set_image_limit_config(self, config={}):
+        json_config = json.dumps(config).decode('utf-8')
+        api.portal.set_registry_record(
+            'image_limits', json_config, ISimplelayoutDefaultSettings)
+
+        transaction.commit()
+
+    @browsing
+    def test_show_low_image_quality_indicator_if_image_is_low_quality(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        browser.login().visit(container, view='@@block_view')
+
+        self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+
+        self.set_image_limit_config({
+            pane.portal_type: {
+                "soft": {"width": pane.image._width + 100}
+            }
+        })
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(1, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+
+    @browsing
+    def test_do_not_show_low_image_quality_indicator_if_image_is_high_quality(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        browser.login().visit(container, view='@@block_view')
+
+        self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+
+        self.set_image_limit_config({
+            pane.portal_type: {
+                "soft": {"width": pane.image._width - 100}
+            }
+        })
+
+        browser.visit(container)
+        self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+
+    @browsing
+    def test_only_show_low_image_quality_indicator_for_editors(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        self.set_image_limit_config({
+            pane.portal_type: {
+                "soft": {"width": pane.image._width + 100}
+            }
+        })
+
+        browser.logout().visit(container, view='@@block_view')
+        self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))

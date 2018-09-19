@@ -16,7 +16,9 @@
             <div class="sliderPanes">
                 <div tal:repeat="pane panes" class="sliderPane">
                     <tal:pane>
-
+                        <tal:block condition="python:view.show_low_image_quality_indicator(pane)">
+                          <div tal:content="structure pane/obj/@@low_image_quality_indicator"></div>
+                        </tal:block>
                         <a href="./sl-ajax-inner-edit-view"
                            tal:condition="view/can_add"
                            class="inneredit"
