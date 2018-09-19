@@ -5,7 +5,7 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Implement image-limits and imagecropping for sliderblock. [elioschmutz]
 
 
 1.4.0 (2017-10-23)
