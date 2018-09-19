@@ -288,3 +288,23 @@ class TestSliderBlockRendering(FunctionalTestCase):
         self.assertEqual(
             [["The image doesn't fit the required dimensions of width: 101px (current: 1px)"]],
             erroneous_fields().values())
+
+    @browsing
+    def test_display_corpped_image_if_available(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane')
+                      .titled('Pane')
+                      .with_dummy_image()
+                      .within(container))
+
+        pane.cropped_image = pane.image
+
+        block_view = container.restrictedTraverse('block_view')
+        browser.open_html(block_view())
+
+        url = browser.css('.sliderImage img').first.get('src')
+
+        pane.cropped_image = None
+
+        browser.open_html(block_view())
+        self.assertNotEqual(browser.css('.sliderImage img').first.get('src'), url)

@@ -20,6 +20,13 @@
                           <div tal:content="structure pane/obj/@@low_image_quality_indicator"></div>
                         </tal:block>
                         <div class="actions">
+                          <a href="./sl-ajax-crop-image"
+                             tal:condition="view/can_add"
+                             class="action crop-image"
+                             tal:attributes="data-uid pane/uid"
+                             title="Crop image"
+                             i18n:attributes="title"></a>
+
                           <a href="./sl-ajax-inner-edit-view"
                              tal:condition="view/can_add"
                              class="action inneredit"
