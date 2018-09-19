@@ -10,4 +10,6 @@
              *"
         />
 
+    <adapter factory="ftw.sliderblock.contents.pane.SliderPaneImageLimitValidator" />
+
 </configure>

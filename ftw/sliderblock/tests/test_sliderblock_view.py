@@ -3,6 +3,7 @@ from ftw.builder import create
 from ftw.simplelayout.interfaces import ISimplelayoutDefaultSettings
 from ftw.sliderblock.tests import FunctionalTestCase
 from ftw.testbrowser import browsing
+from ftw.testbrowser.pages.dexterity import erroneous_fields
 from plone import api
 from plone.app.textfield import RichTextValue
 import json
@@ -265,3 +266,25 @@ class TestSliderBlockRendering(FunctionalTestCase):
 
         browser.logout().visit(container, view='@@block_view')
         self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+
+    @browsing
+    def test_raise_invalid_if_hard_limit_is_not_satisfied(self, browser):
+        container = create(Builder('sliderblock'))
+
+        pane = create(Builder('slider pane')
+                      .titled('Pane')
+                      .with_dummy_image()
+                      .within(container))
+
+        self.set_image_limit_config({
+            pane.portal_type: {
+                "hard": {"width": pane.image._width + 100}
+            }
+        })
+
+        browser.login().visit(pane, view="edit")
+        browser.find_button_by_label('Save').click()
+
+        self.assertEqual(
+            [["The image doesn't fit the required dimensions of width: 101px (current: 1px)"]],
+            erroneous_fields().values())
