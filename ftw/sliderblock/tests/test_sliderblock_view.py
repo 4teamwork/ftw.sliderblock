@@ -210,10 +210,9 @@ class TestSliderBlockRendering(FunctionalTestCase):
             browser.css('.sliderPane').text
         )
 
-    def set_image_limit_config(self, config={}):
-        json_config = json.dumps(config).decode('utf-8')
+    def set_image_limit_config(self, config):
         api.portal.set_registry_record(
-            'image_limits', json_config, ISimplelayoutDefaultSettings)
+            'image_limits', config, ISimplelayoutDefaultSettings)
 
         transaction.commit()
 
@@ -226,10 +225,10 @@ class TestSliderBlockRendering(FunctionalTestCase):
         self.assertEquals(0, len(browser.css('.sliderPane .softLimitIndicator')))
 
         self.set_image_limit_config({
-            pane.portal_type: {
-                "soft": {"width": pane.image._width + 100}
-            }
-        })
+            pane.portal_type: [
+                u'soft: width={}'.format(pane.image._width + 100)
+            ]}
+        )
 
         browser.login().visit(container, view='@@block_view')
         self.assertEquals(1, len(browser.css('.sliderPane .softLimitIndicator')))
@@ -243,10 +242,10 @@ class TestSliderBlockRendering(FunctionalTestCase):
         self.assertEquals(0, len(browser.css('.sliderPane .hardLimitIndicator')))
 
         self.set_image_limit_config({
-            pane.portal_type: {
-                "hard": {"width": pane.image._width + 100}
-            }
-        })
+            pane.portal_type: [
+                u'hard: width={}'.format(pane.image._width + 100)
+            ]}
+        )
 
         browser.login().visit(container, view='@@block_view')
         self.assertEquals(1, len(browser.css('.sliderPane .hardLimitIndicator')))
@@ -260,11 +259,11 @@ class TestSliderBlockRendering(FunctionalTestCase):
         self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
 
         self.set_image_limit_config({
-            pane.portal_type: {
-                "soft": {"width": pane.image._width + 100},
-                "hard": {"width": pane.image._width + 200}
-            }
-        })
+            pane.portal_type: [
+                u'soft: width={}'.format(pane.image._width + 100),
+                u'hard: width={}'.format(pane.image._width + 200)
+            ]}
+        )
 
         browser.login().visit(container, view='@@block_view')
         self.assertEquals(1, len(browser.css('.sliderPane .limitIndicator')))
@@ -280,11 +279,11 @@ class TestSliderBlockRendering(FunctionalTestCase):
         self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
 
         self.set_image_limit_config({
-            pane.portal_type: {
-                "soft": {"width": pane.image._width - 100},
-                "hard": {"width": pane.image._width - 200}
-            }
-        })
+            pane.portal_type: [
+                u'soft: width={}'.format(pane.image._width - 100),
+                u'hard: width={}'.format(pane.image._width - 200)
+            ]}
+        )
 
         browser.visit(container)
         self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
@@ -295,10 +294,10 @@ class TestSliderBlockRendering(FunctionalTestCase):
         pane = create(Builder('slider pane').with_dummy_image().within(container))
 
         self.set_image_limit_config({
-            pane.portal_type: {
-                "soft": {"width": pane.image._width + 100}
-            }
-        })
+            pane.portal_type: [
+                u'soft: width={}'.format(pane.image._width + 100),
+            ]}
+        )
 
         browser.login().visit(container, view='@@block_view')
         self.assertEquals(1, len(browser.css('.limitIndicator')))
@@ -316,10 +315,10 @@ class TestSliderBlockRendering(FunctionalTestCase):
                       .within(container))
 
         self.set_image_limit_config({
-            pane.portal_type: {
-                "hard": {"width": pane.image._width + 100}
-            }
-        })
+            pane.portal_type: [
+                u'hard: width={}'.format(pane.image._width + 100)
+            ]}
+        )
 
         browser.login().visit(pane, view="edit")
         browser.find_button_by_label('Save').click()
