@@ -218,13 +218,12 @@ class TestSliderBlockRendering(FunctionalTestCase):
         transaction.commit()
 
     @browsing
-    def test_show_low_image_quality_indicator_if_image_is_low_quality(self, browser):
+    def test_show_soft_limit_indicator_if_soft_limit_is_not_satisfied(self, browser):
         container = create(Builder('sliderblock'))
         pane = create(Builder('slider pane').with_dummy_image().within(container))
 
         browser.login().visit(container, view='@@block_view')
-
-        self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+        self.assertEquals(0, len(browser.css('.sliderPane .softLimitIndicator')))
 
         self.set_image_limit_config({
             pane.portal_type: {
@@ -233,28 +232,65 @@ class TestSliderBlockRendering(FunctionalTestCase):
         })
 
         browser.login().visit(container, view='@@block_view')
-        self.assertEquals(1, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+        self.assertEquals(1, len(browser.css('.sliderPane .softLimitIndicator')))
 
     @browsing
-    def test_do_not_show_low_image_quality_indicator_if_image_is_high_quality(self, browser):
+    def test_show_hard_limit_indicator_if_hard_limit_is_not_satisfied(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(0, len(browser.css('.sliderPane .hardLimitIndicator')))
+
+        self.set_image_limit_config({
+            pane.portal_type: {
+                "hard": {"width": pane.image._width + 100}
+            }
+        })
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(1, len(browser.css('.sliderPane .hardLimitIndicator')))
+
+    @browsing
+    def test_show_only_hard_limit_indicator_if_hard_and_soft_limit_are_not_satisfied(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
+
+        self.set_image_limit_config({
+            pane.portal_type: {
+                "soft": {"width": pane.image._width + 100},
+                "hard": {"width": pane.image._width + 200}
+            }
+        })
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(1, len(browser.css('.sliderPane .limitIndicator')))
+        self.assertEquals(1, len(browser.css('.sliderPane .hardLimitIndicator')))
+
+    @browsing
+    def test_do_not_show_limit_indicator_if_all_limits_are_satisfied(self, browser):
         container = create(Builder('sliderblock'))
         pane = create(Builder('slider pane').with_dummy_image().within(container))
 
         browser.login().visit(container, view='@@block_view')
 
-        self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+        self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
 
         self.set_image_limit_config({
             pane.portal_type: {
-                "soft": {"width": pane.image._width - 100}
+                "soft": {"width": pane.image._width - 100},
+                "hard": {"width": pane.image._width - 200}
             }
         })
 
         browser.visit(container)
-        self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+        self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
 
     @browsing
-    def test_only_show_low_image_quality_indicator_for_editors(self, browser):
+    def test_only_show_limit_indicator_for_editors(self, browser):
         container = create(Builder('sliderblock'))
         pane = create(Builder('slider pane').with_dummy_image().within(container))
 
@@ -264,11 +300,14 @@ class TestSliderBlockRendering(FunctionalTestCase):
             }
         })
 
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(1, len(browser.css('.limitIndicator')))
+
         browser.logout().visit(container, view='@@block_view')
-        self.assertEquals(0, len(browser.css('.sliderPane .lowImageQualityIndicator')))
+        self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
 
     @browsing
-    def test_raise_invalid_if_hard_limit_is_not_satisfied(self, browser):
+    def test_raise_invalid_on_form_validation_if_hard_limit_is_not_satisfied(self, browser):
         container = create(Builder('sliderblock'))
 
         pane = create(Builder('slider pane')

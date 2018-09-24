@@ -68,5 +68,5 @@ class SliderBlockView(BaseBlock, SliderView):
 
         return pane.external_url or ''
 
-    def show_low_image_quality_indicator(self, paneData):
-        return self.can_add() and IImageLimits(paneData.get('obj')).has_low_quality_image()
+    def show_limit_indicator(self):
+        return self.can_add()
