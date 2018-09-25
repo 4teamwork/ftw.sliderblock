@@ -1,7 +1,10 @@
 from ftw.builder import Builder
 from ftw.builder import create
+from ftw.simplelayout.interfaces import ISimplelayoutDefaultSettings
 from ftw.sliderblock.tests import FunctionalTestCase
 from ftw.testbrowser import browsing
+from ftw.testbrowser.pages.dexterity import erroneous_fields
+from plone import api
 from plone.app.textfield import RichTextValue
 import json
 import transaction
@@ -206,3 +209,140 @@ class TestSliderBlockRendering(FunctionalTestCase):
             ['The title of the pane The text of the pane'],
             browser.css('.sliderPane').text
         )
+
+    def set_image_limit_config(self, config):
+        api.portal.set_registry_record(
+            'image_limits', config, ISimplelayoutDefaultSettings)
+
+        transaction.commit()
+
+    @browsing
+    def test_show_soft_limit_indicator_if_soft_limit_is_not_satisfied(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(0, len(browser.css('.sliderPane .softLimitIndicator')))
+
+        self.set_image_limit_config({
+            pane.portal_type: [
+                u'soft: width={}'.format(pane.image._width + 100)
+            ]}
+        )
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(1, len(browser.css('.sliderPane .softLimitIndicator')))
+
+    @browsing
+    def test_show_hard_limit_indicator_if_hard_limit_is_not_satisfied(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(0, len(browser.css('.sliderPane .hardLimitIndicator')))
+
+        self.set_image_limit_config({
+            pane.portal_type: [
+                u'hard: width={}'.format(pane.image._width + 100)
+            ]}
+        )
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(1, len(browser.css('.sliderPane .hardLimitIndicator')))
+
+    @browsing
+    def test_show_only_hard_limit_indicator_if_hard_and_soft_limit_are_not_satisfied(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
+
+        self.set_image_limit_config({
+            pane.portal_type: [
+                u'soft: width={}'.format(pane.image._width + 100),
+                u'hard: width={}'.format(pane.image._width + 200)
+            ]}
+        )
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(1, len(browser.css('.sliderPane .limitIndicator')))
+        self.assertEquals(1, len(browser.css('.sliderPane .hardLimitIndicator')))
+
+    @browsing
+    def test_do_not_show_limit_indicator_if_all_limits_are_satisfied(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        browser.login().visit(container, view='@@block_view')
+
+        self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
+
+        self.set_image_limit_config({
+            pane.portal_type: [
+                u'soft: width={}'.format(pane.image._width - 100),
+                u'hard: width={}'.format(pane.image._width - 200)
+            ]}
+        )
+
+        browser.visit(container)
+        self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
+
+    @browsing
+    def test_only_show_limit_indicator_for_editors(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane').with_dummy_image().within(container))
+
+        self.set_image_limit_config({
+            pane.portal_type: [
+                u'soft: width={}'.format(pane.image._width + 100),
+            ]}
+        )
+
+        browser.login().visit(container, view='@@block_view')
+        self.assertEquals(1, len(browser.css('.limitIndicator')))
+
+        browser.logout().visit(container, view='@@block_view')
+        self.assertEquals(0, len(browser.css('.sliderPane .limitIndicator')))
+
+    @browsing
+    def test_raise_invalid_on_form_validation_if_hard_limit_is_not_satisfied(self, browser):
+        container = create(Builder('sliderblock'))
+
+        pane = create(Builder('slider pane')
+                      .titled('Pane')
+                      .with_dummy_image()
+                      .within(container))
+
+        self.set_image_limit_config({
+            pane.portal_type: [
+                u'hard: width={}'.format(pane.image._width + 100)
+            ]}
+        )
+
+        browser.login().visit(pane, view="edit")
+        browser.find_button_by_label('Save').click()
+
+        self.assertEqual(
+            [["The image doesn't fit the required dimensions of width: 101px (current: 1px)"]],
+            erroneous_fields().values())
+
+    @browsing
+    def test_display_corpped_image_if_available(self, browser):
+        container = create(Builder('sliderblock'))
+        pane = create(Builder('slider pane')
+                      .titled('Pane')
+                      .with_dummy_image()
+                      .within(container))
+
+        pane.cropped_image = pane.image
+
+        block_view = container.restrictedTraverse('block_view')
+        browser.open_html(block_view())
+
+        url = browser.css('.sliderImage img').first.get('src')
+
+        pane.cropped_image = None
+
+        browser.open_html(block_view())
+        self.assertNotEqual(browser.css('.sliderImage img').first.get('src'), url)

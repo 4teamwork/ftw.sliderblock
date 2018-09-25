@@ -16,14 +16,24 @@
             <div class="sliderPanes">
                 <div tal:repeat="pane panes" class="sliderPane">
                     <tal:pane>
+                        <tal:block condition="view/show_limit_indicator">
+                          <div tal:content="structure pane/obj/@@limit_indicator"></div>
+                        </tal:block>
+                        <div class="actions">
+                          <a href="./sl-ajax-crop-image"
+                             tal:condition="view/can_add"
+                             class="action crop-image"
+                             tal:attributes="data-uid pane/uid"
+                             title="Crop image"
+                             i18n:attributes="title"></a>
 
-                        <a href="./sl-ajax-inner-edit-view"
-                           tal:condition="view/can_add"
-                           class="inneredit"
-                           tal:attributes="data-uid pane/uid"
-                           title="Edit image directly"
-                           i18n:attributes="title"></a>
-
+                          <a href="./sl-ajax-inner-edit-view"
+                             tal:condition="view/can_add"
+                             class="action inneredit"
+                             tal:attributes="data-uid pane/uid"
+                             title="Edit image directly"
+                             i18n:attributes="title"></a>
+                        </div>
                         <a tal:omit-tag="not: pane/link_url"
                            tal:attributes="href pane/link_url;"
                            class="slider-link">

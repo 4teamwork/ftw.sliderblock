@@ -1,5 +1,7 @@
 from Acquisition._Acquisition import aq_inner
 from ftw.simplelayout.browser.blocks.base import BaseBlock
+from ftw.simplelayout.images.cropping.behaviors import IImageCropping
+from ftw.simplelayout.images.interfaces import IImageLimits
 from ftw.slider.browser.slider import SliderView
 from plone import api
 from Products.CMFCore.utils import getToolByName
@@ -28,6 +30,7 @@ class SliderBlockView(BaseBlock, SliderView):
                 'show_pane_caption': pane.show_title or pane.text,
                 'image_tag': self.get_image_tag(pane),
                 'link_url': self.get_link_url(pane),
+                'obj': pane,
             })
         return data
 
@@ -44,7 +47,11 @@ class SliderBlockView(BaseBlock, SliderView):
     def get_image_tag(self, pane):
         scaling = pane.restrictedTraverse('@@images')
         direction = self.context.crop_image and 'down' or 'up'
-        scale = scaling.scale('image', scale='sliderblock', direction=direction)
+        field_name = 'image'
+        if IImageCropping.providedBy(pane) and pane.cropped_image:
+            field_name = 'cropped_image'
+
+        scale = scaling.scale(field_name, scale='sliderblock', direction=direction)
         return scale.tag(css_class='headerImage', alt=pane.Description(), title='')
 
     def get_link_url(self, pane):
@@ -60,3 +67,6 @@ class SliderBlockView(BaseBlock, SliderView):
             )
 
         return pane.external_url or ''
+
+    def show_limit_indicator(self):
+        return self.can_add()

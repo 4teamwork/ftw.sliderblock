@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-12-07 15:38+0000\n"
+"POT-Creation-Date: 2018-09-19 13:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,10 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 
 #: ./ftw/sliderblock/browser/templates/sliderblock.pt:23
+msgid "Crop image"
+msgstr "Bild zuschneiden"
+
+#: ./ftw/sliderblock/browser/templates/sliderblock.pt:30
 msgid "Edit image directly"
 msgstr "Bild direkt bearbeiten"
 
@@ -22,7 +26,7 @@ msgstr "Bild direkt bearbeiten"
 msgid "SliderBlock"
 msgstr "Bilderkarussell"
 
-#: ./ftw/sliderblock/configure.zcml:22
+#: ./ftw/sliderblock/configure.zcml:23
 msgid "SliderBlock for use with ftw.simplelayout"
 msgstr ""
 
@@ -31,46 +35,46 @@ msgid "The slider block renders an image carousel. The images shown in the carou
 msgstr "Das Bilderkarussell zeigte eine rotierende Bildergalerie an. Die angezeigten Bilder können auf interne oder externe URLs verlinken."
 
 #. Default: "This SliderBlock is empty. Please add some SliderPanes through ${folder_contents_url}."
-#: ./ftw/sliderblock/browser/templates/sliderblock.pt:15
+#: ./ftw/sliderblock/browser/templates/sliderblock.pt:13
 msgid "empty_sliderblock_label"
 msgstr "Dieser SliderBlock ist leer. Bitte fügen Sie Bilder hinzu via <a href=\"${folder_contents_url}\">Inhalte</a>."
 
-#: ./ftw/sliderblock/configure.zcml:22
+#: ./ftw/sliderblock/configure.zcml:23
 msgid "ftw.sliderblock default"
 msgstr ""
 
 #. Default: "Crop and scale images to a predefined ratio"
-#: ./ftw/sliderblock/contents/sliderblock.py:34
+#: ./ftw/sliderblock/contents/sliderblock.py:44
 msgid "help_text_crop_image"
 msgstr "Bilder werden auf ein hinterlegtes Verhältnis zugeschnitten (Standardmässig im Verhältnis 3 zu 2). Falls deaktiviert werden die Bilder nicht mehr zugeschnitten. Vorteil falls aktiviert, alle Bilder sind immer gleich gross."
 
 #. Default: "Show folder contents"
-#: ./ftw/sliderblock/contents/sliderblock.py:75
+#: ./ftw/sliderblock/contents/sliderblock.py:85
 msgid "label_show_folder_contents"
 msgstr "Inhalte anzeigen"
 
 #. Default: "Crop and scale images"
-#: ./ftw/sliderblock/contents/sliderblock.py:32
+#: ./ftw/sliderblock/contents/sliderblock.py:42
 msgid "sliderblock_crop_image_label"
 msgstr "Bilder zuschneiden"
 
 #. Default: "Show title"
-#: ./ftw/sliderblock/contents/sliderblock.py:26
+#: ./ftw/sliderblock/contents/sliderblock.py:36
 msgid "sliderblock_show_title_label"
 msgstr "Titel anzeigen"
 
 #. Default: "See http://kenwheeler.github.io/slick/"
-#: ./ftw/sliderblock/contents/sliderblock.py:43
+#: ./ftw/sliderblock/contents/sliderblock.py:53
 msgid "sliderblock_slick_config_description"
 msgstr "Siehe http://kenwheeler.github.io/slick/"
 
 #. Default: "Configuration"
-#: ./ftw/sliderblock/contents/sliderblock.py:42
+#: ./ftw/sliderblock/contents/sliderblock.py:52
 msgid "sliderblock_slick_config_label"
 msgstr "Konfiguration"
 
 #. Default: "Title"
-#: ./ftw/sliderblock/contents/sliderblock.py:21
+#: ./ftw/sliderblock/contents/sliderblock.py:31
 msgid "sliderblock_title_label"
 msgstr "Titel"
 
