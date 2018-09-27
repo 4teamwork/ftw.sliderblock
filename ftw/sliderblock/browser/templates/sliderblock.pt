@@ -19,7 +19,7 @@
                         <tal:block condition="view/show_limit_indicator">
                           <div tal:content="structure pane/obj/@@limit_indicator"></div>
                         </tal:block>
-                        <div class="actions">
+                        <div class="actions" tal:condition="python: not request.get('_disable_editmode', False)">
                           <a href="./sl-ajax-crop-image"
                              tal:condition="view/can_add"
                              class="action crop-image"
