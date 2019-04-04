@@ -5,7 +5,7 @@ Changelog
 1.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Plone 5.1 support [busykoala]
 
 
 1.6.0 (2019-04-09)
