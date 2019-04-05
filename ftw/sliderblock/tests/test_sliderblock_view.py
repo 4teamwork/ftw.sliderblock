@@ -80,7 +80,7 @@ class TestSliderBlockRendering(FunctionalTestCase):
                 '{"labels": {"prev": "Previous", "play": "Play", "pause": "Pause", "next": "Next"}, "foo": true, "bar": 2000}'
             ),
             json.loads(
-                browser.css('.sl-block-content div').first.attrib['data-settings']
+                browser.css('.sliderWrapper').first.attrib['data-settings']
             )
         )
 
@@ -100,7 +100,7 @@ class TestSliderBlockRendering(FunctionalTestCase):
         browser.login().open(page)
         self.assertEqual(
             '{}',
-            browser.css('.sl-block-content div').first.attrib['data-settings'])
+            browser.css('.sliderWrapper').first.attrib['data-settings'])
 
     @browsing
     def test_images_are_cropped_and_down_scaled_by_default(self, browser):

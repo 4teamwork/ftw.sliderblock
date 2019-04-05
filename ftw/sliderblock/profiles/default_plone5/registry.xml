@@ -16,6 +16,15 @@
         </value>
     </record>
 
+    <record
+        name="plone.types_not_searched"
+        interface="Products.CMFPlone.interfaces.controlpanel.ISearchSchema"
+        field="types_not_searched">
+        <value>
+            <element>ftw.sliderblock.SliderBlock</element>
+        </value>
+    </record>
+
     <records prefix="plone.resources/ftw-sliderblock-js"
              interface='Products.CMFPlone.interfaces.IResourceRegistry'>
         <value key="js">++resource++ftw.sliderblock/sliderblock.js</value>
