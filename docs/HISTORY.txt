@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5.2 (unreleased)
+1.6.0 (2019-04-09)
 ------------------
 
 - Use title, or alt text of image as "dot" text. If there is none, use index as fallback. [mathias.leimgruber]
