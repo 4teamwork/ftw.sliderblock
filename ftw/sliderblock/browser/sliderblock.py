@@ -52,7 +52,12 @@ class SliderBlockView(BaseBlock, SliderView):
             field_name = 'cropped_image'
 
         scale = scaling.scale(field_name, scale='sliderblock', direction=direction)
-        return scale.tag(css_class='headerImage', alt=pane.Description(), title='')
+
+        alttext = u''
+        if hasattr(pane, 'image_alt_text'):
+            alttext = pane.image_alt_text if pane.image_alt_text else u''
+
+        return scale.tag(css_class='headerImage', alt=alttext, title='')
 
     def get_link_url(self, pane):
         """

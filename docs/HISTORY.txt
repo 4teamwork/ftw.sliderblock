@@ -5,7 +5,7 @@ Changelog
 1.5.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use alt text from ftw.slider 3.1.6 if available. [mathias.leimgruber]
 
 
 1.5.1 (2018-09-28)
