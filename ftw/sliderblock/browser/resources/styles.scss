@@ -28,3 +28,10 @@
     }
   }
 }
+
+.slick-dots > li {
+  > button {
+    width: 1em;
+    overflow: hidden;
+  }
+}

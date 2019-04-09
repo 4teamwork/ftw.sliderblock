@@ -6,10 +6,21 @@
 
     var sliders = {
       sliders: {},
+
+      customPaging: function(slider, index) {
+        var title = $(slider.$slides[index]).find('.title').text();
+        var alttext = $(slider.$slides[index]).find('.sliderImage img').attr('alt');
+        var buttonText = title || alttext || index;
+        var button = $('<button type="button" />').text(buttonText);
+        return button[0].outerHTML
+      },
+
       init: function() {
         var self = this;
         $(".sliderWrapper").each(function() {
-          self.sliders[this.id] = new global.Slider($(".sliderPanes", this), $(this).data("settings"));
+          var settings = $(this).data("settings");
+          settings['customPaging'] = self.customPaging;
+          self.sliders[this.id] = new global.Slider($(".sliderPanes", this), settings);
         });
       },
       update: function() {
@@ -20,9 +31,13 @@
           var sliderId = sliderPane.parent().attr("id");
 
           if (sliderId in self.sliders) {
-            self.sliders[sliderId].update(sliderPane, sliderPane.parent().data("settings"));
+            var settings = sliderPane.parent().data("settings");
+            settings.customPaging = self.customPaging;
+            self.sliders[sliderId].update(sliderPane, settings);
           } else {
-            self.sliders[sliderId] = new global.Slider(sliderPane, sliderPane.data("settings"));
+            var settings = sliderPane.data("settings");
+            settings.customPaging = self.customPaging;
+            self.sliders[sliderId] = new global.Slider(sliderPane, settings);
           }
 
         });
