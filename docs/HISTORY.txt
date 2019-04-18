@@ -5,6 +5,8 @@ Changelog
 1.6.1 (unreleased)
 ------------------
 
+- Use new dropzone based upload solution of ftw.simplelayout 2.x [mathias.leimgruber]
+
 - Add Plone 5.1 support [busykoala]
 
 

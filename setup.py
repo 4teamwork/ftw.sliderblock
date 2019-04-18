@@ -51,7 +51,7 @@ setup(
     zip_safe=False,
 
     install_requires=[
-        'ftw.simplelayout [contenttypes] >= 1.22.0',
+        'ftw.simplelayout [contenttypes] >= 2.0.0',
         'ftw.slider >= 3.1.5',
         'ftw.upgrade',
         'setuptools',

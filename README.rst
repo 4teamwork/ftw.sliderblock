@@ -19,6 +19,12 @@ Plone 4.3.x
    :target: https://jenkins.4teamwork.ch/job/ftw.sliderblock-master-test-plone-4.3.x.cfg
 
 
+Plone 5.1.x
+
+Please use 2.x Releases.
+Be aware that the new dropzone based upload solution needs ftw.simplelayout 2.0.0.
+Thus version 2.x of ftw.sliderblock requires a ftw.simplelayout 2.x version.
+
 Installation
 ============
 
