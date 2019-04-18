@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.6.1 (unreleased)
+2.0.0 (2019-04-18)
 ------------------
 
 - Use new dropzone based upload solution of ftw.simplelayout 2.x [mathias.leimgruber]
