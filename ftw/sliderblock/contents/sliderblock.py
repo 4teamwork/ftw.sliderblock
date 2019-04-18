@@ -71,14 +71,6 @@ class SliderBlockActions(DefaultActions):
     def specific_actions(self):
         return OrderedDict(
             [
-                ('upload', {
-                    'class': 'upload icon-image-upload',
-                    'title': translate(
-                        SLPMF(u'label_upload', default=u'Upload'),
-                        context=self.request),
-                    'href': './sl-ajax-upload-block-view'
-                }),
-
                 ('folderContents', {
                     'class': 'icon-folder-contents redirect',
                     'title': translate(

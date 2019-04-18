@@ -8,6 +8,16 @@
 
     <tal:slider define="panes view/get_template_data;">
 
+        <span class="dropzonewrapper"
+              tal:condition="view/can_add">
+          <div class="filedropzone"
+               tal:attributes="data-endpoint string:${here/absolute_url}/dropzone-upload; data-type string:File">
+              <div class="dz-message"
+                   data-dz-message><span i18n:translate="">Upload files here</span></div>
+          </div>
+          <button class="upload">Upload</button>
+        </span>
+
         <div tal:condition="python: view.can_add() and not panes"
              tal:define="folder_contents_url string:${context/absolute_url}/folder_contents;"
              i18n:translate="empty_sliderblock_label">This SliderBlock is empty. Please add some SliderPanes through <tal:href i18n:name="folder_contents_url" tal:content="folder_contents_url"></tal:href>.</div>

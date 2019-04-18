@@ -14,10 +14,11 @@
         class=".sliderblock.SliderBlockView"
         />
 
-    <adapter
-        factory=".uploadcapable.SliderBlockQuickUploadCapableFileFactory"
+    <browser:page
         for="ftw.sliderblock.contents.interfaces.ISliderBlock"
-        provides="collective.quickupload.interfaces.IQuickUploadFileFactory"
+        name="dropzone-upload"
+        class=".dropzone.SliderBlockUpload"
+        permission="cmf.ModifyPortalContent"
         />
 
 </configure>
