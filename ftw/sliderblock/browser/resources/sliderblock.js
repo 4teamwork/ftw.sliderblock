@@ -29,14 +29,12 @@
 
           var sliderPane = $(this);
           var sliderId = sliderPane.parent().attr("id");
+          var settings = sliderPane.parent().data("settings");
+          settings.customPaging = self.customPaging;
 
-          if (sliderId in self.sliders) {
-            var settings = sliderPane.parent().data("settings");
-            settings.customPaging = self.customPaging;
+          if (sliderId in self.sliders) {            
             self.sliders[sliderId].update(sliderPane, settings);
           } else {
-            var settings = sliderPane.data("settings");
-            settings.customPaging = self.customPaging;
             self.sliders[sliderId] = new global.Slider(sliderPane, settings);
           }
 
