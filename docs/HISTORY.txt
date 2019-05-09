@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.6.1 (unreleased)
+1.6.1 (2019-05-09)
 ------------------
 
 - Fix init loading issue. This was a regression from 1.6.0. [mathias.leimgruber]
