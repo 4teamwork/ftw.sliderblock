@@ -5,7 +5,7 @@ Changelog
 1.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix init loading issue. This was a regression from 1.6.0. [mathias.leimgruber]
 
 
 1.6.0 (2019-04-09)
