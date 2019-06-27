@@ -11,7 +11,7 @@
         var title = $(slider.$slides[index]).find('.title').text();
         var alttext = $(slider.$slides[index]).find('.sliderImage img').attr('alt');
         var buttonText = title || alttext || index;
-        var button = $('<button type="button" />').text(buttonText);
+        var button = $('<button type="button" data-index="' + (index + 1) + '" />').text(buttonText);
         return button[0].outerHTML
       },
 
