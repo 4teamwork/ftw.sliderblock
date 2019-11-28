@@ -27,8 +27,9 @@
 
     <records prefix="plone.resources/ftw-sliderblock-js"
              interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-        <value key="js">++resource++ftw.sliderblock/sliderblock.js</value>
+        <value key="js">++plone++ftw.sliderblock/sliderblock.js</value>
         <value key="deps">jquery</value>
+        <value key="css"></value>
     </records>
 
     <records prefix="plone.bundles/ftw-sliderblock-resources"
@@ -38,8 +39,9 @@
         </value>
         <value key="enabled">True</value>
         <value key="depends">plone-legacy</value>
-        <value key="compile">False</value>
-        <value key="jscompilation">++plone++sliderblock/ftw-sliderblock-compiled.js</value>
+        <value key="compile">True</value>
+        <value key="jscompilation">++plone++ftw.sliderblock/ftw-sliderblock-bundle.js</value>
+        <value key="csscompilation">++plone++ftw.sliderblock/ftw-sliderblock-bundle.css</value>
         <value key="merge_with">default</value>
     </records>
 
