@@ -55,7 +55,7 @@ class TestDropZoneUpload(FunctionalTestCase):
 
         with browser.login().expect_http_error(400):
             self.make_dropzone_upload(sliderblock,
-                                      self.asset('textfile.txt').open('r'))
+                                      self.asset('textfile.txt').open('rb'))
 
         self.assertEqual(
             {u'error': u'Only images can be added to the sliderblock.',
