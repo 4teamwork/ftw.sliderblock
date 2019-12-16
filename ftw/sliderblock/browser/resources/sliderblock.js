@@ -1,9 +1,13 @@
-(function(global, $) {
-
-  "use strict";
-
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery', 'slider'], factory);
+    } else {
+        // Browser globals
+        factory(root.jQuery, root.Slider);
+    }
+}(typeof self !== 'undefined' ? self : this, function ($, Slider) {
   $(function() {
-
     var sliders = {
       sliders: {},
 
@@ -20,7 +24,7 @@
         $(".sliderWrapper").each(function() {
           var settings = $(this).data("settings");
           settings['customPaging'] = self.customPaging;
-          self.sliders[this.id] = new global.Slider($(".sliderPanes", this), settings);
+          self.sliders[this.id] = new Slider($(".sliderPanes", this), settings);
         });
       },
       update: function() {
@@ -32,10 +36,10 @@
           var settings = sliderPane.parent().data("settings");
           settings.customPaging = self.customPaging;
 
-          if (sliderId in self.sliders) {            
+          if (sliderId in self.sliders) {
             self.sliders[sliderId].update(sliderPane, settings);
           } else {
-            self.sliders[sliderId] = new global.Slider(sliderPane, settings);
+            self.sliders[sliderId] = new Slider(sliderPane, settings);
           }
 
         });
@@ -47,7 +51,5 @@
     $(document).on("blockContentReplaced", function() { sliders.update(); });
 
     $(document).on("sortstop", ".sl-column", function() { sliders.update(); });
-
   });
-
-}(window, jQuery));
+}));
