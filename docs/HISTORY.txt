@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.2 (unreleased)
+2.0.2 (2019-12-17)
 ------------------
 
 - Add data-index attr to buttons of dot template. [mathias.leimgruber]
