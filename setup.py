@@ -52,7 +52,7 @@ setup(
 
     install_requires=[
         'ftw.simplelayout [contenttypes] >= 2.0.0',
-        'ftw.slider >= 3.1.5',
+        'ftw.slider >= 3.4.1',
         'ftw.upgrade',
         'setuptools',
         'plone.api',
