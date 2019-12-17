@@ -60,6 +60,7 @@ setup(
         'plone.app.dexterity',
         'plone.app.registry',
         'Plone',
+        'ftw.uploadutility',
     ],
 
     tests_require=tests_require,

@@ -2,7 +2,7 @@ from ftw.sliderblock.testing import FTW_SLIDERBLOCK_FUNCTIONAL_TESTING
 from path import Path
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from unittest2 import TestCase
+from unittest import TestCase
 import transaction
 
 
