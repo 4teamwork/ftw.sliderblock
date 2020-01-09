@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.3 (unreleased)
+2.0.3 (2020-01-09)
 ------------------
 
 - Add ftw.sliderblock portal_type translation to plone domain. [tinagerber]
