@@ -5,7 +5,7 @@ Changelog
 2.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove plone.app.referenceablebehavior in plone 5. [busykoala]
 
 
 2.0.3 (2020-01-09)
