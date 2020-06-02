@@ -5,6 +5,7 @@ Changelog
 2.0.5 (unreleased)
 ------------------
 
+- Introduce slots for easier customization of the template. [mathias.leimgruber]
 - Add required dropzone template to upload functionality. [mathias.leimgruber]
 
 
