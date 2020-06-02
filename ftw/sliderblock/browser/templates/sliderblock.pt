@@ -8,15 +8,40 @@
 
     <tal:slider define="panes view/get_template_data;">
 
-        <span class="dropzonewrapper"
-              tal:condition="view/can_add">
-          <div class="filedropzone"
-               tal:attributes="data-endpoint string:${here/absolute_url}/dropzone-upload; data-type string:File">
-              <div class="dz-message"
-                   data-dz-message><span i18n:translate="">Upload files here</span></div>
-          </div>
-          <button class="upload">Upload</button>
-        </span>
+        <metal:DROPZONE define-slot="dropzone">
+            <span class="dropzonewrapper"
+                tal:condition="view/can_add">
+                <div id="dropzone-tmpl">
+                    <div class="dz-preview dz-image-preview">
+                        <i class="fa fa-window-close dz-remove" data-dz-remove
+                        title="Remove file" i18n:attributes="title title_dropzone_remove;"
+                        ></i>
+                        <div class="dz-image">
+                            <img data-dz-thumbnail>
+                        </div>
+                        <div class="dz-details">
+                            <div class="dz-size" data-dz-size></div>
+                            <div class="dz-filename"><span data-dz-name></span></div>
+                        </div>
+                        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                        <div class="dz-success-mark"><span>✔</span></div>
+                        <div class="dz-error-mark"><span>✘</span></div>
+                        <div class="dz-file-metadata"
+                            i18n:domain="plone">
+                            <label for="MAKEUNIQUE_title" i18n:translate="label_title">Title</label>
+                            <input id="MAKEUNIQUE_title" value="" type="text" name="title">
+                        </div>
+                    </div>
+                </div>
+                <div class="filedropzone"
+                    tal:attributes="data-endpoint string:${here/absolute_url}/dropzone-upload;
+                    data-type string:ftw.slider.Pane">
+                    <div class="dz-message" data-dz-message><span i18n:translate="">Upload files here</span></div>
+                </div>
+                <button class="upload">Upload</button>
+            </span>
+        </metal:DROPZONE>
 
         <div tal:condition="python: view.can_add() and not panes"
              tal:define="folder_contents_url string:${context/absolute_url}/folder_contents;"

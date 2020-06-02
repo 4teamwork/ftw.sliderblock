@@ -5,7 +5,7 @@ Changelog
 2.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add required dropzone template to upload functionality. [mathias.leimgruber]
 
 
 2.0.4 (2020-05-29)
