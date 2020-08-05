@@ -72,7 +72,7 @@ class SliderBlockActions(DefaultActions):
         return OrderedDict(
             [
                 ('folderContents', {
-                    'class': 'icon-folder-contents redirect',
+                    'class': 'sl-icon-folder-contents icon-folder-contents redirect',
                     'title': translate(
                         _(u'label_show_folder_contents',
                           default=u'Show folder contents'),
